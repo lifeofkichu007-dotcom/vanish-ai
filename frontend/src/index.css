@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-primary: #b026ff;
+  --color-secondary: #00f0ff;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: #f3f4f6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@utility glass {
+  background-color: color-mix(in srgb, var(--color-surface) 50%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, white 10%, transparent);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+@utility text-gradient {
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+}
+
+@utility glow-border {
+  animation: glowPulse 5s ease-in-out infinite;
+  border: 1px solid transparent;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 8px rgba(176, 38, 255, 0.4);
+    border-color: rgba(176, 38, 255, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+    border-color: rgba(0, 240, 255, 0.7);
+  }
+
+  100% {
+    box-shadow: 0 0 8px rgba(176, 38, 255, 0.4);
+    border-color: rgba(176, 38, 255, 0.4);
+  }
+}

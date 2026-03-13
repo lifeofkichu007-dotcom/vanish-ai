@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Modern SVG favicon -->
+  <link rel="icon" href="/logo3.svg" type="image/svg+xml">
+
+  <!-- PNG fallbacks for older browsers -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/logo4-32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/logo4-64x64.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/logo4-128x128.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Content Security Policy for mitigating XSS -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:; font-src 'self';">
+
+  <title>Vanish AI – AI Humanizer & AI Detection Remover</title>
+
+  <meta name="description" content="Vanish AI is a powerful AI humanizer that removes AI detection patterns while keeping your text exactly the same." />
+  <meta name="keywords" content="AI humanizer, AI detection remover, undetectable AI text" />
+</head>
+
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
