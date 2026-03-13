@@ -51,7 +51,7 @@ function App() {
 
     setError(null);
 
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+    const apiUrl = 'https://vanish-ai-backend.onrender.com';
 
     try {
       // Sanitize input before sending to backend
