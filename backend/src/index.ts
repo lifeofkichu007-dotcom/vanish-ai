@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import xss from 'xss';
 import { humaniseText } from './humaniser';
 
+
 dotenv.config();
 
 const app = express();
@@ -13,7 +14,9 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: "https://vanish-ai.vercel.app"
+}));
 app.use(express.json());
 
 // Rate limiting: 5 requests per minute per IP
