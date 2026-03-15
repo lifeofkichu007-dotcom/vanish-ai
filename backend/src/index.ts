@@ -11,36 +11,20 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security middleware
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        connectSrc: [
-          "'self'",
-          "https://vanish-ai-backend.onrender.com",
-          "http://localhost:5173"
-        ],
-      },
-    },
-  })
-);
-
-// CORS configuration
-const corsOptions = {
-origin: "*",
-methods: ["GET", "POST", "OPTIONS"],
-allowedHeaders: ["Content-Type"]
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
-
-// Body parser
+// Parse JSON body
 app.use(express.json());
 
-// Rate limiting: 5 requests per minute per IP
+// Enable CORS
+app.use(cors());
+
+// Security headers
+app.use(
+helmet({
+crossOriginResourcePolicy: false
+})
+);
+
+// Rate limiting
 const limiter = rateLimit({
 windowMs: 60 * 1000,
 max: 5,
@@ -53,35 +37,36 @@ app.use('/api', limiter);
 
 // Humanise endpoint
 app.post('/api/humanise', (req, res) => {
-try {
-const { text, strength = 'Medium' } = req.body;
+  try {
 
-```
-if (!text || typeof text !== 'string') {
-  return res.status(400).json({ error: 'Valid text is required' });
-}
+    const text = req.body.text || "";
+    const strength = req.body.strength || "Medium";
 
-if (text.length > 100000) {
-  return res.status(400).json({ error: 'Text too long. Maximum 100000 characters.' });
-}
+    if (!text || typeof text !== 'string') {
+      return res.status(400).json({ error: 'Valid text is required' });
+    }
 
-// Sanitize input
-const sanitizedText = xss(text);
+    if (text.length > 100000) {
+      return res.status(400).json({ error: 'Text too long. Maximum 100000 characters.' });
+    }
 
-const humanised = humaniseText(sanitizedText, strength);
+    // Sanitize input
+    const sanitizedText = xss(text);
 
-res.json({ result: humanised });
-```
+    // Process text
+    const humanised = humaniseText(sanitizedText, strength);
 
-} catch (error) {
-console.error('Error processing text:', error);
-res.status(500).json({ error: 'Internal server error while processing text' });
-}
+    res.json({ result: humanised });
+
+  } catch (error) {
+    console.error('Error processing text:', error);
+    res.status(500).json({ error: 'Internal server error while processing text' });
+  }
 });
 
 // Health check
 app.get('/health', (req, res) => {
-res.status(200).json({ status: 'ok' });
+res.json({ status: 'ok' });
 });
 
 app.listen(PORT, () => {
