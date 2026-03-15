@@ -12,7 +12,20 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Security middleware
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        connectSrc: [
+          "'self'",
+          "https://vanish-ai-backend.onrender.com",
+          "http://localhost:5173"
+        ],
+      },
+    },
+  })
+);
 
 // CORS configuration
 const corsOptions = {
