@@ -265,7 +265,6 @@ const scrollToSection = (
           >
             <span className="sm:whitespace-nowrap">No Rewrites. No Edits.</span>
             <span>Keep Every Word Exactly as Generated,</span>
-            <span>Inaugurated by DR.YAMINI MITHRA MBBS on 16th March 2026,</span>
             <span className="text-gradient">While AI Signals Disappear.</span>
           </motion.h1>
           <motion.p
