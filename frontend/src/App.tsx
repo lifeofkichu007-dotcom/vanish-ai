@@ -131,23 +131,52 @@ setOutputText(data.result);
     }
   };
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, id: string) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
-    const section = document.getElementById(id);
-    const header = document.querySelector('header');
+const scrollToSection = (
+  e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
+  id: string
+) => {
+  e.preventDefault();
+  setIsMobileMenuOpen(false);
 
-    if (section && header) {
-      const headerHeight = header.offsetHeight;
-      const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
-      const offset = id === 'tool' ? 1 : 70;
+  const section = document.getElementById(id);
+  const header = document.querySelector("header");
 
-      window.scrollTo({
-        top: sectionTop - headerHeight - offset,
-        behavior: 'smooth'
-      });
-    }
-  };
+  if (!section || !header) return;
+
+  const headerHeight = header.offsetHeight;
+  const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+
+  // Keep TOOL behavior exactly the same
+  if (id === "tool") {
+    window.scrollTo({
+      top: sectionTop - headerHeight - 1,
+      behavior: "smooth",
+    });
+    return;
+  }
+
+  // Center FAQ and Feedback
+  if (id === "faq" || id === "feedback") {
+    const sectionHeight = section.offsetHeight;
+    const viewportHeight = window.innerHeight;
+
+    const centeredPosition =
+      sectionTop - headerHeight - (viewportHeight / 2 - sectionHeight / 2);
+
+    window.scrollTo({
+      top: centeredPosition,
+      behavior: "smooth",
+    });
+
+    return;
+  }
+
+  // Default behavior for other sections
+  window.scrollTo({
+    top: sectionTop - headerHeight - 70,
+    behavior: "smooth",
+  });
+};
 
   const faqs = [
     {
