@@ -30,4 +30,5 @@ export const humaniseText = (text: string, strength: Strength): string => {
     }
 
     return result;
+
 };
