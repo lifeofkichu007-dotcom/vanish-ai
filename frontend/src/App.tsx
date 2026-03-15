@@ -51,17 +51,20 @@ function App() {
 
     setError(null);
 
-    const apiUrl = 'https://vanish-ai-backend.onrender.com';
+    
+    
 
     try {
       // Sanitize input before sending to backend
       const cleanText = DOMPurify.sanitize(inputText);
 
-      const response = await fetch(`${apiUrl}/api/humanise`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: cleanText, strength }),
-      });
+      const response = await fetch("https://vanish-ai-backend.onrender.com/api/humanise", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+  body: JSON.stringify({ text: cleanText })
+});
 
       const data = await response.json();
 
