@@ -146,7 +146,7 @@ const scrollToSection = (
   const headerHeight = header.offsetHeight;
   const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
 
-  // Keep TOOL behavior exactly the same
+  // TOOL → keep exactly the same
   if (id === "tool") {
     window.scrollTo({
       top: sectionTop - headerHeight - 1,
@@ -155,23 +155,26 @@ const scrollToSection = (
     return;
   }
 
-  // Center FAQ and Feedback
-  if (id === "faq" || id === "feedback") {
-    const sectionHeight = section.offsetHeight;
-    const viewportHeight = window.innerHeight;
-
-    const centeredPosition =
-      sectionTop - headerHeight - (viewportHeight / 2 - sectionHeight / 2);
-
+  // FAQ → place title just below the header
+  if (id === "faq") {
     window.scrollTo({
-      top: centeredPosition,
+      top: sectionTop - headerHeight - 10,
       behavior: "smooth",
     });
-
     return;
   }
 
-  // Default behavior for other sections
+  // FEEDBACK → move slightly higher
+  if (id === "feedback") {
+    window.scrollTo({
+      top: sectionTop - headerHeight - 120,
+      behavior: "smooth",
+    });
+    
+    return;
+  }
+
+  // default behavior
   window.scrollTo({
     top: sectionTop - headerHeight - 70,
     behavior: "smooth",
