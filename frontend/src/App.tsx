@@ -146,37 +146,14 @@ const scrollToSection = (
   const headerHeight = header.offsetHeight;
   const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
 
-  // TOOL → keep exactly the same
-  if (id === "tool") {
-    window.scrollTo({
-      top: sectionTop - headerHeight - 1,
-      behavior: "smooth",
-    });
-    return;
-  }
+  let offset = 70; // default
 
-  // FAQ → place title just below the header
-  if (id === "faq") {
-    window.scrollTo({
-      top: sectionTop - headerHeight - 40,
-      behavior: "smooth",
-    });
-    return;
-  }
+  if (id === "tool") offset = 1;        // keep exactly the same
+  if (id === "faq") offset = 20;        // move FAQ slightly up
+  if (id === "feedback") offset = 60;   // move feedback up but not too much
 
-  // FEEDBACK → move slightly higher
-  if (id === "feedback") {
-    window.scrollTo({
-      top: sectionTop - headerHeight - 180,
-      behavior: "smooth",
-    });
-
-    return;
-  }
-
-  // default behavior
   window.scrollTo({
-    top: sectionTop - headerHeight - 70,
+    top: sectionTop - headerHeight - offset,
     behavior: "smooth",
   });
 };
