@@ -158,7 +158,7 @@ const scrollToSection = (
   // FAQ → place title just below the header
   if (id === "faq") {
     window.scrollTo({
-      top: sectionTop - headerHeight - 10,
+      top: sectionTop - headerHeight - 40,
       behavior: "smooth",
     });
     return;
@@ -167,10 +167,10 @@ const scrollToSection = (
   // FEEDBACK → move slightly higher
   if (id === "feedback") {
     window.scrollTo({
-      top: sectionTop - headerHeight - 120,
+      top: sectionTop - headerHeight - 180,
       behavior: "smooth",
     });
-    
+
     return;
   }
 
